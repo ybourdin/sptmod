@@ -1,0 +1,211 @@
+testname: Empirical Results for Adjusting Truncated Backpropagation Through Time while Training Neural Audio Effects
+testId: conf25_demo
+bufferSize: 2048
+stopOnErrors: false
+showButtonPreviousPage: true
+remoteService: service/write.php
+pages:
+-   type: mushra
+    id: mushra_00000_0
+    name: 'Listening demo: example 01/12 (Param Config 1/4, Source 1/3)'
+    content: "<strong>Input audio:</strong> Guitar strumming<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00000.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 30 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00000_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00000_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00000_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00000_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00001_0
+    name: 'Listening demo: example 02/12 (Param Config 1/4, Source 2/3)'
+    content: "<strong>Input audio:</strong> Drums<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00001.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 30 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00001_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00001_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00001_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00001_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00002_0
+    name: 'Listening demo: example 03/12 (Param Config 1/4, Source 3/3)'
+    content: "<strong>Input audio:</strong> Gypsy guitar<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00002.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 30 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00002_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00002_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00002_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00002_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00003_0
+    name: 'Listening demo: example 04/12 (Param Config 2/4, Source 1/3)'
+    content: "<strong>Input audio:</strong> Guitar strumming<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00000.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 0.1 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00003_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00003_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00003_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00003_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00004_0
+    name: 'Listening demo: example 05/12 (Param Config 2/4, Source 2/3)'
+    content: "<strong>Input audio:</strong> Drums<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00001.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 0.1 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00004_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00004_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00004_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00004_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00005_0
+    name: 'Listening demo: example 06/12 (Param Config 2/4, Source 3/3)'
+    content: "<strong>Input audio:</strong> Gypsy guitar<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00002.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 0.1 ms    Ratio: 6    Release: 0.1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00005_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00005_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00005_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00005_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00006_0
+    name: 'Listening demo: example 07/12 (Param Config 3/4, Source 1/3)'
+    content: "<strong>Input audio:</strong> Guitar strumming<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00000.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 4 dB    Attack: 0.03 ms    Ratio: 10    Release: 1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00006_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00006_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00006_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00006_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00007_0
+    name: 'Listening demo: example 08/12 (Param Config 3/4, Source 2/3)'
+    content: "<strong>Input audio:</strong> Drums<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00001.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 4 dB    Attack: 0.03 ms    Ratio: 10    Release: 1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00007_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00007_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00007_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00007_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00008_0
+    name: 'Listening demo: example 09/12 (Param Config 3/4, Source 3/3)'
+    content: "<strong>Input audio:</strong> Gypsy guitar<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00002.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 4 dB    Attack: 0.03 ms    Ratio: 10    Release: 1 s    Thrust: medium</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00008_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00008_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00008_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00008_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00009_0
+    name: 'Listening demo: example 10/12 (Param Config 4/4, Source 1/3)'
+    content: "<strong>Input audio:</strong> Guitar strumming<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00000.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 1 ms    Ratio: 4    Release: 0.2 s    Thrust: high</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00009_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00009_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00009_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00009_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00010_0
+    name: 'Listening demo: example 11/12 (Param Config 4/4, Source 2/3)'
+    content: "<strong>Input audio:</strong> Drums<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00001.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 1 ms    Ratio: 4    Release: 0.2 s    Thrust: high</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00010_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00010_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00010_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00010_0.flac
+    switchBack: false
+-   type: mushra
+    id: mushra_00011_0
+    name: 'Listening demo: example 12/12 (Param Config 4/4, Source 3/3)'
+    content: "<strong>Input audio:</strong> Gypsy guitar<br /><audio controls><source src='configs/resources/audio/conf25_demo/sources/input_00002.flac' type='audio/flac'></audio><br /><br /><strong>Control parameters:</strong> <pre>Threshold: 0 dB    Attack: 1 ms    Ratio: 4    Release: 0.2 s    Thrust: high</pre><br />You can use the numbers on your keyboard to cycle between the reference (0) and the models (1, 2, 3). You can also set a loop using the sliders below the waveform.\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/conf25_demo/reference/output_00011_0.flac
+    excludeReferenceFromConditions: true
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    stimuli:
+        SPTMod24: configs/resources/audio/conf25_demo/job_52476/output_00011_0.flac
+        SPTMod25: configs/resources/audio/conf25_demo/job_52628/output_00011_0.flac
+        TCN: configs/resources/audio/conf25_demo/job_54011/output_00011_0.flac
+    switchBack: false

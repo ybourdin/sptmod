@@ -1,0 +1,16 @@
+language: node_js
+
+services:
+  - xvfb
+
+node_js:
+  - stable
+
+before_install:
+  - npm install -g grunt-cli
+
+install:
+  - npm install
+
+script:
+  - grunt package

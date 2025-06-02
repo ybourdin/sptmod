@@ -1,0 +1,16 @@
+version: '2'
+networks:
+  default:
+    external: true
+    name: npm
+services:
+  webmushra:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./results:/var/www/html/results
+      - ./configs:/var/www/html/configs
+#    ports:
+#      - "8123:80"

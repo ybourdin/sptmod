@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAFx25 - SPTMod - Audio Evaluation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--pico-background-color);
+            flex-direction: column;
+            gap: 2rem; /* Increased gap for better spacing */
+            padding: 1rem; /* Add some padding for smaller screens */
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Space between each button-text pair */
+            width: clamp(200px, 80%, 400px); /* Responsive width */
+            text-align: center;
+        }
+        .button-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem; /* Space between button and its text */
+        }
+        .button-item a[role="button"] {
+            width: 100%; /* Make button fill its container */
+        }
+        .button-description {
+            font-size: 0.9em;
+            color: var(--pico-secondary-color);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-group">
+        <div class="button-item">
+            <a href="mushra_demo/" role="button" class="contrast">Access the listening demo</a>
+            <p class="button-description">All evaluation audio items are exhibited, along with all the information about each item.</p>
+        </div>
+        <div class="button-item">
+            <a href="mushra/" role="button" class="secondary">Access the listening test</a>
+            <p class="button-description">The subjective listening test, identical to the one presented in the paper. Your results are shown at the end, but not saved.</p>
+        </div>
+    </div>
+</body>
+</html>

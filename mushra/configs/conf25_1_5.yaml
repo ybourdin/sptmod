@@ -1,0 +1,339 @@
+testname: conf25_1_5
+testId: conf25_1_5
+bufferSize: 2048
+stopOnErrors: false
+showButtonPreviousPage: true
+remoteService: service/write.php
+pages:
+-   type: generic
+    id: home
+    name: Home
+    content: <img src='configs/resources/img/api.webp' /><p>Bienvenue dans ce test d'écoute.<br /><span style="color:blue">Welcome to this listening test.</span></p><p>Il est <strong>crucial</strong> de réaliser ce test dans les meilleures conditions d'écoute, de préférence avec un casque, ou avec de bonnes enceintes.<br /><span style="color:blue">It is <strong>crucial</strong> to carry out this test in the best listening conditions, preferably with headphones, or with good speakers.</span></p><p>Les prochaines pages vont vous présenter l'effet audio évalué ainsi que le déroulement du test.<br /><span style="color:blue">On the following pages, we'll introduce you to the audio effect we're evaluating, and explain how the test works.</span></p>
+-   type: generic
+    id: comp_intro
+    name: Introduction to dynamic range compression
+    content: <p>Si vous ne savez pas ce qu'est l'effet de compression de plage dynamique, il vous est conseillé de regarder cette vidéo de 2 minutes.<br /><span style="color:blue">If you don't know what dynamic range compression is, and have french-speaking skills, we recommend you watch this 2-minute video. Otherwise, you will still get to understand what it is from the examples on the following pages.</span></p><iframe width="560" height="315" src="https://www.youtube.com/embed/fPbzHBLwELc?si=Yvln0pc-O5WKSWS-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+-   type: mushra
+    id: comp_tutorial
+    name: Tutorial
+    content: "<p>Veuillez écouter les sons proposés. Des effets de compression avec des réglages différents (A, B, C, D) ont été appliqués à un même son source. Prêtez attention aux différences de volume.<br /><span style=\"color:blue\">Please listen to the following sounds. Compression effects with different settings (A, B, C, D) have been applied to the same source sound. Please note the differences in volume.</span></p><p>La <span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 1 ms; release: 50 ms\">sortie B</span> correspond à un seuil (threshold) plus bas que la <span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -20 dB; ratio: 4; attack: 1 ms; release: 50 ms\">sortie A</span>, et donc une compression plus forte.<br /><span style=\"color:blue\"><span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 1 ms; release: 50 ms\">Output B</span> corresponds to a lower threshold than <span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -20 dB; ratio: 4; attack: 1 ms; release: 50 ms\">Output A</span>, and therefore stronger compression.</span></p><p>La <span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 1 ms; release: 200 ms\">sortie C</span> correspond à un temps de relâchement (release) élevé. La réduction de gain appliquée évolue plus lentement par rapport aux autres sorties.<br /><span style=\"color:blue\"><span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 1 ms; release: 200 ms\">Output C</span> corresponds to a high release time. The gain reduction applied evolves more slowly compared to the other outputs.</span></p><p>La <span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 10 ms; release: 50 ms\">sortie D</span> correspond à un temps d'attaque (attack) élevé. Après un pic de volume, la réduction de gain se déclenche tardivement, ce qui donne plus d'énergie aux coups.<br /><span style=\"color:blue\"><span style=\"border-bottom: 1px dotted black;\" title=\"threshold: -30 dB; ratio: 4; attack: 10 ms; release: 50 ms\">Output D</span> corresponds to a high attack time. After a volume peak, gain reduction is triggered late, giving more energy to the strokes.</span></p>\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"#tr_ConditionRatings\",function(){\n    document.getElementById(\"tr_ConditionRatings\").style.display = \"none\";\n    document.getElementById(\"mushra_canvas\").style.display = \"none\";\n    var allRows = document.getElementById(\"mushra_items\").rows;\n    for (var i=0; i<allRows.length; i++) {\n        if (allRows[i].cells.length > 1) {\n            allRows[i].deleteCell(0);\n            allRows[i].deleteCell(0);\n        }\n    }\n},100,90000);\n</script>\n"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/comp_tutorial/source.ogg
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: true
+    excludeReferenceFromConditions: true
+    stimuli:
+        Source: configs/resources/audio/comp_tutorial/source.ogg
+        Output A: configs/resources/audio/comp_tutorial/20_4_1_50.ogg
+        Output B: configs/resources/audio/comp_tutorial/30_4_1_50.ogg
+        Output C: configs/resources/audio/comp_tutorial/30_4_1_200.ogg
+        Output D: configs/resources/audio/comp_tutorial/30_4_10_50.ogg
+    switchBack: false
+-   type: mushra
+    id: mushra_tutorial
+    name: Tutorial
+    content: "<p>Voici un exemple de page du test.<br /><span style=\"color:blue\">Here is an example of test page.</span></p><p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style=\"color:blue\">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style=\"color:blue\">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style=\"color:blue\">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p><p>Attention aux différences de volume : il est important de les pénaliser. Ici, la condition 2 est la référence, mais à laquelle un gain de -3 dB a été appliqué, elle ne mérite donc pas un score maximal.<br /><span style=\"color:blue\">Pay attention to volume differences: they must be penalized. Here, condition 2 is the reference, but with a gain of -3 dB applied, so it doesn't deserve a maximum score.</span></p>"
+    showWaveform: true
+    enableLooping: true
+    reference: configs/resources/audio/comp_tutorial/30_4_1_50.ogg
+    createAnchor35: false
+    createAnchor70: false
+    randomize: false
+    showConditionNames: false
+    excludeReferenceFromConditions: false
+    stimuli:
+        Source minus 3 dB: configs/resources/audio/comp_tutorial/source_m3db.ogg
+        Output B minus 3 dB: configs/resources/audio/comp_tutorial/30_4_1_50_m3db.ogg
+        Output A: configs/resources/audio/comp_tutorial/20_4_1_50.ogg
+        Output C: configs/resources/audio/comp_tutorial/30_4_1_200.ogg
+    switchBack: false
+-   type: generic
+    id: ready_up
+    name: Get ready
+    content: <p>Le vrai test va maintenant commencer.<br /><span style="color:blue">The real test is about to begin.</span></p>
+-   type: generic
+    id: mushra_sources
+    name: Sources
+    content: "<p>Nous vous laissons la possibilité d'écouter les 3 extraits audio source, utilisés comme entrée de l'effet (l'effet leur sera appliqué).<br /><span style=\"color:blue\">We leave you the option of listening to the 3 source audio extracts, used as effect inputs (the effect will be applied to them).</span></p><audio controls><source src='configs/resources/audio/conf25/sources/input_00000.flac' type='audio/flac'></audio><br/>\n                <audio controls><source src='configs/resources/audio/conf25/sources/input_00001.flac' type='audio/flac'></audio><br/>\n                <audio controls><source src='configs/resources/audio/conf25/sources/input_00002.flac' type='audio/flac'></audio>\n<script>\nfunction waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {\n  var startTimeInMs = Date.now();\n  (function loopSearch() {\n    if (document.querySelector(selector) != null) {\n      callback();\n      return;\n    }\n    else {\n      setTimeout(function () {\n        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)\n          return;\n        loopSearch();\n      }, checkFrequencyInMs);\n    }\n  })();\n}\nwaitForElementToDisplay(\"audio\",function(){\n    for (const el of document.getElementsByTagName(\"audio\")) el.volume = 0.5;\n    \n},100,90000);\n</script>\n"
+-
+    -   type: mushra
+        id: mushra_00006_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00006_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00006_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00006_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00006_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00006_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00006_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00006_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00006_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00006_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00006_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00006_1.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00000_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00000_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00000_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00000_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00000_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00000_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00000_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00000_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00000_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00000_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00000_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00000_1.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00002_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00002_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00002_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00002_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00002_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00002_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00002_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00002_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00002_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00002_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00002_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00002_1.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00001_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00001_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00001_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00001_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00001_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00001_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00001_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00001_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00001_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00001_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00001_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00001_1.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00004_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00004_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00004_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00004_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00004_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00004_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00004_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00004_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00004_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00004_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00004_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00004_1.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00005_0
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00005_0.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00005_0.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00005_0.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00005_0.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00005_0.flac
+        switchBack: false
+    -   type: mushra
+        id: mushra_00005_1
+        name: MUSHRA test
+        content: <p>Un même effet de compression a été appliqué à un même extrait musical source à travers différents modèles. La référence correspond à l'effet idéal attendu (de qualité maximale).<br /><span style="color:blue">The same compression effect was applied to the same source music extract across different models. The reference corresponds to the ideal effect expected (of maximum quality).</span></p><p>Vous devez évaluer le degré de ressemblance de chaque condition par rapport à la référence. Vous ne devez pas nécessairement attribuer un score de 0 à la condition de plus mauvaise qualité, mais par contre vous devez attribuer un score de 100 à au moins une des conditions car un son de référence est caché parmi celles-ci. Vous pouvez noter donner un score de 100 à plusieurs conditions.<br /><span style="color:blue">You need to assess how similar each condition is to the reference. You don't necessarily have to assign a score of 0 to the condition with the worst quality, but you do have to assign a score of 100 to at least one of the conditions, as a reference sound is hidden among them. You're allowed to assign a score of 100 to several conditions.</span></p><p>Pour cela vous pouvez <b>utiliser les chiffres de votre clavier pour alterner</b> entre la référence (0) et les autres conditions (1, 2, 3, 4, 5). Vous pouvez aussi délimiter une boucle via les curseurs sous la forme d'onde.<br /><span style="color:blue">To do this, you can <b>use the numbers on your keyboard to cycle</b> between the reference (0) and the other conditions (1, 2, 3, 4, 5). You can also set a loop using the sliders below the waveform.</span></p>
+        showWaveform: true
+        enableLooping: true
+        reference: configs/resources/audio/conf25/reference/output_00005_1.flac
+        excludeReferenceFromConditions: false
+        createAnchor35: false
+        createAnchor70: false
+        randomize: true
+        showConditionNames: false
+        stimuli:
+            SPTMod24: configs/resources/audio/conf25/job_52476/output_00005_1.flac
+            SPTMod25: configs/resources/audio/conf25/job_52628/output_00005_1.flac
+            TCN: configs/resources/audio/conf25/job_54011/output_00005_1.flac
+            anchor0: configs/resources/audio/conf25/anchor0/output_00005_1.flac
+        switchBack: false
+-   type: finish
+    name: Merci !
+    content: <p>Le test est terminé. Pour envoyer vos résultats, veuillez répondre à ces questions.<br /><span style="color:blue">The test is finished. To send your results, please answer these questions.</span></p>
+    showResults: true
+    writeResults: true
+    questionnaire:
+    -   type: text
+        optional: true
+        name: participant
+        label: Votre nom (facultatif)<br /><i>Your name (optional)</i>
+    -   type: likert
+        name: expertise_understood
+        label: "*Pensez-vous avoir compris ce qu'est la compression de plage dynamique ?<br /><i>*Do you think you understood what dynamic range compression is?</i><br />"
+        response:
+        -   label: Non<br /><i>No</i>
+            value: 0
+        -   label: Oui<br /><i>Yes</i>
+            value: 1
+    -   type: likert
+        name: expertise_music
+        label: "*Jouez-vous d'un instrument de musique ?<br /><i>*Do you play a musical instrument?</i><br />"
+        response:
+        -   label: Non<br /><i>No</i>
+            value: 0
+        -   label: Oui<br /><i>Yes</i>
+            value: 1
+    -   type: likert
+        name: expertise_mixing
+        label: '*Avez-vous déjà utilisé un compresseur de plage dynamique ?<br /><i>*Have you ever used a dynamic range compressor?</i><br />'
+        response:
+        -   label: Non<br /><i>No</i>
+            value: 0
+        -   label: Oui<br /><i>Yes</i>
+            value: 1
+        -   label: Oui, fréquemment<br /><i>Yes, frequently</i>
+            value: 2
+    -   type: likert
+        name: expertise_researcher
+        label: "*Etes-vous un développeur ou un chercheur dans le domaine de l'audio ?<br /><i>*Are you a developer or researcher in the field of audio?</i><br/>"
+        response:
+        -   label: Non<br /><i>No</i>
+            value: 0
+        -   label: Oui<br /><i>Yes</i>
+            value: 1
+    -   type: likert
+        name: expertise_mix
+        label: '*Avez-vous des compétences en mixage et/ou mastering ?<br /><i>*Do you have mixing and/or mastering skills?</i><br/>'
+        response:
+        -   label: Non<br /><i>No</i>
+            value: 0
+        -   label: Oui<br /><i>Yes</i>
+            value: 1
+        -   label: Oui, par ma profession<br /><i>Yes, through my profession</i>
+            value: 2
+    -   type: long_text
+        name: hardware
+        label: "*Quel matériel d'écoute avez-vous utilisé ?<br /><i>*What is your listening gear?</i><br />"
+        optional: false
+    -   type: long_text
+        optional: true
+        name: feedback
+        label: Commentaires<br /><i>Feedback</i>
