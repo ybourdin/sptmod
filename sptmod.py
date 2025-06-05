@@ -82,8 +82,10 @@ class LinearInterp(torch.nn.Module):
         return self.convt(*args, **kwargs)
 
 def film_op(x, ab, channels):
-    a, b = torch.split(ab, channels, dim=-1)
-    return a[..., None] * x + b[..., None]
+    if ab.ndim == 2 and x.ndim == 3:
+        ab = ab.unsqueeze(-1)
+    a, b = torch.split(ab, channels, dim=1)
+    return a * x + b
 
 def lookback_length(kernel_size_list, dilation_list, stride_list, pooling_list):
     n = 1
@@ -91,7 +93,10 @@ def lookback_length(kernel_size_list, dilation_list, stride_list, pooling_list):
         n = 1 + d * (k - 1) + s * (p * n - 1)
     return n
 
-class LookbackNetwork(torch.nn.Module):
+class SPNet(torch.nn.Module):
+    """
+    State Prediction Network
+    """
 
     def __init__(self, in_out_model_channels, state_sizes, linear_end: bool, cond_dim, out_channels_list, kernel_size_list, dilation_list, stride_list, pooling_list, pooling_type, film_hidden_neurons_list):
         super().__init__()
@@ -134,6 +139,7 @@ class LookbackNetwork(torch.nn.Module):
         ])
         if cond_dim > 0:
             assert isinstance(film_hidden_neurons_list, Sequence)
+            ## make a sequence of Linear -> PReLU -> Linear -> PReLU -> ... -> Linear
             self.films = []
             for c in out_channels_list:
                 layers = []
@@ -187,12 +193,9 @@ class LookbackNetwork(torch.nn.Module):
 
         return v
     
-class TurboCachedTFiLM(torch.nn.Module):
+class CachedTFiLM(torch.nn.Module):
     """
-    maxpool
-    film (optional)
-    turboRNN
-    upsample
+    Pooling -> FiLM (optional) -> RNN -> Upsample
     """
     def __init__(self, in_channels, block_size, cond_dim, pooling_type, rnn_cell, rnn_hidden_size, film_hidden_neurons_list):
         super().__init__()
@@ -251,9 +254,9 @@ class Model(nn.Module):
             self, /, input_channels, sidechain_channels, n_params,
             s_channels_list, s_kernel_size_list, s_dilation_list, tfilm_block_size, tfilm_pooling_type,
             cond_size, film_hidden_neurons_list, rnn_cell, rnn_hidden_size,
-            lbnet, lbnet_dropout, lbnet_dropout_full_items,
-            lbnet_linear_end, lbnet_out_channels_list, lbnet_kernel_size_list, lbnet_dilation_list, lbnet_stride_list, lbnet_pooling_list, lbnet_pooling_type,
-            lbnet_film_hidden_neurons_list,
+            spnet, spnet_dropout, spnet_dropout_full_items,
+            spnet_linear_end, spnet_out_channels_list, spnet_kernel_size_list, spnet_dilation_list, spnet_stride_list, spnet_pooling_list, spnet_pooling_type,
+            spnet_film_hidden_neurons_list,
             **kwargs
     ):
         super().__init__(**kwargs)
@@ -262,8 +265,8 @@ class Model(nn.Module):
         self.sidechain_channels = sidechain_channels
         self.n_params = n_params
         self.tfilm_block_size = tfilm_block_size
-        self.lbnet_dropout = lbnet_dropout
-        self.lbnet_dropout_full_items = lbnet_dropout_full_items
+        self.spnet_dropout = spnet_dropout
+        self.spnet_dropout_full_items = spnet_dropout_full_items
 
         self.sc = sidechain_channels > 0
         self.scc = sidechain_channels if self.sc else input_channels
@@ -283,6 +286,7 @@ class Model(nn.Module):
             for c in s_channels_list
         )
 
+        # neural network transforming the controls - unused in the paper
         self.condnet = nn.Sequential(
             nn.Linear(n_params, cond_size),
             nn.PReLU(cond_size),
@@ -295,7 +299,7 @@ class Model(nn.Module):
         cond_dim = cond_size if cond_size is not None else n_params
 
         self.s_tfilms = nn.ModuleList(
-            TurboCachedTFiLM(c, tfilm_block_size, cond_dim, tfilm_pooling_type, rnn_cell, rnn_hidden_size, film_hidden_neurons_list)
+            CachedTFiLM(c, tfilm_block_size, cond_dim, tfilm_pooling_type, rnn_cell, rnn_hidden_size, film_hidden_neurons_list)
             for c in s_channels_list
         )
 
@@ -303,24 +307,25 @@ class Model(nn.Module):
             nn.PReLU(conv.conv.out_channels) for conv in self.s_convs
         )
 
-        self.lookback_net = LookbackNetwork(
+        self.spnet = SPNet(
             input_channels + sidechain_channels + input_channels, 
             len(s_channels_list) * [(2 if rnn_cell == "LSTM" else 1) * rnn_hidden_size],
-            lbnet_linear_end,
+            spnet_linear_end,
             cond_dim,
-            lbnet_out_channels_list,
-            lbnet_kernel_size_list,
-            lbnet_dilation_list,
-            lbnet_stride_list,
-            lbnet_pooling_list,
-            lbnet_pooling_type,
-            lbnet_film_hidden_neurons_list
-        )   if lbnet else None
+            spnet_out_channels_list,
+            spnet_kernel_size_list,
+            spnet_dilation_list,
+            spnet_stride_list,
+            spnet_pooling_list,
+            spnet_pooling_type,
+            spnet_film_hidden_neurons_list
+        )   if spnet else None
 
-        if lbnet_dropout > 0 and not lbnet_dropout_full_items:
-            self.lbnet_dropout_layer = nn.Dropout(p=lbnet_dropout)
+        # dropout - unused in the paper
+        if spnet_dropout > 0 and not spnet_dropout_full_items:
+            self.spnet_dropout_layer = nn.Dropout(p=spnet_dropout)
         else:
-            self.lbnet_dropout_layer = None
+            self.spnet_dropout_layer = None
     
     def reset_caches(self):
         for module in self.modules():
@@ -337,11 +342,12 @@ class Model(nn.Module):
     
     def calc_indices(self, target_length):
         """
+        see the README for details about this function
         returns (
             expected input length,
             starting index for modulation path,
             starting index for audio path,
-            starting index for lbnet,
+            starting index for SPN,
             cropping size list for modulation path,
             cropping size list for audio path
         )
@@ -372,7 +378,7 @@ class Model(nn.Module):
             cma[j] = - L - sum_sa + (km[j] - 1) * P
         tm0 = target_length - sm[0] - km[0] * P
         ta0 = - sum(sa)
-        tl0 = - self.lookback_net.expected_input_length if self.lookback_net is not None else 0
+        tl0 = - self.spnet.expected_input_length if self.spnet is not None else 0
         input_length = max(target_length - tm0, target_length - ta0, target_length - tl0)
         i0m = input_length - (target_length - tm0)
         i0a = input_length - (target_length - ta0)
@@ -392,6 +398,7 @@ class Model(nn.Module):
         """
 
         # separate input and sidechain
+        # x goes into the audio path, s goes into the modulation path
         if self.sc:
             s = x[:, self.input_channels:]
             x = x[:, :self.input_channels]
@@ -400,16 +407,17 @@ class Model(nn.Module):
         else:
             s = x
         
-        N = len(self.s_convs)
+        N = len(self.s_convs)   # number of blocks
 
         if self.n_params > 0:
-            zp = self.condnet(p)
+            zp = self.condnet(p)    # unused in the paper: self.condnet is Identity
         else:
             zp = p
 
-        lbstate = None
-        if use_spn and self.lookback_net is not None:
-            _il0, _il1 = self.i0l, self.i0l + self.lookback_net.expected_input_length
+        spstate = None
+        if use_spn and self.spnet is not None:
+            _il0, _il1 = self.i0l, self.i0l + self.spnet.expected_input_length
+            # select the past "lookback" samples, preceding the audio to be processed, and forward to the SPN
             lookback = torch.concat((
                     x[:, :, _il0 : _il1],
                     y_true[:, :, _il0 : _il1]
@@ -420,44 +428,52 @@ class Model(nn.Module):
                 ), 
                 dim=1
             )
-            lbstate = self.lookback_net(lookback, zp)
-            # apply dropout
-            if self.lbnet_dropout > 0:
-                if self.lbnet_dropout_full_items:
-                    lbstate[:int(self.lbnet_dropout * lbstate.size(0))] = 0.
+
+            spstate = self.spnet(lookback, zp)
+
+            # apply dropout - unused in the paper
+            if self.spnet_dropout > 0:
+                if self.spnet_dropout_full_items:
+                    spstate[:int(self.spnet_dropout * spstate.size(0))] = 0.
                 else:
-                    lbstate = self.lbnet_dropout_layer(lbstate)
+                    spstate = self.spnet_dropout_layer(spstate)
 
         if paddingmode == CachedPadding1d.NoPadding:
+            # select the time ranges calculated with self.calc_indices()
             vm = s[:, :, self.i0m:]
             va = x[:, :, self.i0a:]
         else:
             vm = s
             va = x
+        # vm (resp. va) is the intermediary tensor of the operations in the modulation (resp. audio) path
 
         for j in range(N):
             vm = self.s_convs[j](vm, paddingmode=paddingmode)
             vm = self.s_acts[j](vm)
-            if lbstate is None:
+            if spstate is None:
                 initial_state = None
             else:
+                # spstate contains the states of all blocks, the state to be passed to a TFiLM block is a slice of spstate
                 state_size = (2 if self.hparams.rnn_cell == "LSTM" else 1) * self.hparams.rnn_hidden_size
-                initial_state = lbstate[:, j * state_size : (j + 1) * state_size]
-            tfilm = self.s_tfilms[j](vm, zp, state=initial_state, paddingmode=paddingmode)  # on obtient alors (2 * input_channels) channels
+                initial_state = spstate[:, j * state_size : (j + 1) * state_size]
+            tfilm = self.s_tfilms[j](vm, zp, state=initial_state, paddingmode=paddingmode)
             if paddingmode == CachedPadding1d.NoPadding:
+                # cropping
                 tfilm_f = tfilm[:, :, self.cma[j]:]
             else:
                 tfilm_f = tfilm
-            ksi_mul, ksi_plus = torch.split(self.s_conv11f[j](tfilm_f), self.hparams.input_channels, dim=1)
+            tfilm_f = self.s_conv11f[j](tfilm_f)
+            va = film_op(va, tfilm_f, self.hparams.input_channels)
 
-            va = va * ksi_mul + ksi_plus
-
-            if j < N-1 :
-                tfilm_s_mul, tfilm_s_plus = torch.split(self.s_conv11s[j](tfilm), self.s_convs[j].conv.out_channels, dim=1)
+            if j < N - 1 :
+                tfilm_s = self.s_conv11s[j](tfilm)
                 if paddingmode == CachedPadding1d.NoPadding:
+                    # TFiLM consumes `tfilm_block_size` samples
+                    # crop to allow the following FiLM operation between vm and tfilm_s
                     vm = vm[:, :, self.tfilm_block_size:]
-                vm = vm * tfilm_s_mul + tfilm_s_plus
+                vm = film_op(vm, tfilm_s, self.s_convs[j].conv.out_channels)
                 if paddingmode == CachedPadding1d.NoPadding:
+                    # cropping
                     vm = vm[:, :, self.cmm[j]:]
         
         y = va
