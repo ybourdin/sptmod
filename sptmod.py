@@ -267,6 +267,7 @@ class Model(nn.Module):
         self.tfilm_block_size = tfilm_block_size
         self.spnet_dropout = spnet_dropout
         self.spnet_dropout_full_items = spnet_dropout_full_items
+        self.rnn_hidden_size = rnn_hidden_size
 
         self.sc = sidechain_channels > 0
         self.scc = sidechain_channels if self.sc else input_channels
@@ -454,7 +455,7 @@ class Model(nn.Module):
                 initial_state = None
             else:
                 # spstate contains the states of all blocks, the state to be passed to a TFiLM block is a slice of spstate
-                state_size = (2 if self.hparams.rnn_cell == "LSTM" else 1) * self.hparams.rnn_hidden_size
+                state_size = (2 if self.rnn_cell == "LSTM" else 1) * self.rnn_hidden_size
                 initial_state = spstate[:, j * state_size : (j + 1) * state_size]
             tfilm = self.s_tfilms[j](vm, zp, state=initial_state, paddingmode=paddingmode)
             if paddingmode == CachedPadding1d.NoPadding:
@@ -463,7 +464,7 @@ class Model(nn.Module):
             else:
                 tfilm_f = tfilm
             tfilm_f = self.s_conv11f[j](tfilm_f)
-            va = film_op(va, tfilm_f, self.hparams.input_channels)
+            va = film_op(va, tfilm_f, self.input_channels)
 
             if j < N - 1 :
                 tfilm_s = self.s_conv11s[j](tfilm)
